@@ -5,17 +5,32 @@
 </div>
 
 <div class="box">
-    <%for(var i = 0; i<itensList.length; i++){%>
-      <div class="item">
-        <input type="checkbox">
-        <p><%= itensList[i] %></p>
-      </div>
-    <%}%>
+  <%itensList.forEach(itemList => {%>
+  <form action="/delete" method="post">
+    <input type="hidden" name="listTitle" value="<%= listTitle %>" />
+    <div class="item">
+      <input
+        type="checkbox"
+        name="itemList"
+        value="<%= itemList %>"
+        onChange="this.form.submit()"
+      />
+      <p><%= itemList %></p>
+    </div>
+  </form>
+
+  <%});%>
 </div>
 
-<form class="" action="/" method="post">
-  <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autocapitalize="on"/>
-  <button type="submit" name="button">+</button>
+<form class="submitBox" action="/" method="post">
+  <input
+    type="text"
+    name="newItem"
+    placeholder="New Item"
+    autocomplete="off"
+    autocapitalize="on"
+  />
+  <button type="submit" name="button" value="<%= listTitle %>">+</button>
 </form>
 
 <%- include('footer') %>
